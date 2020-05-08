@@ -35,6 +35,9 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
+    @post = Post.all.find(post_params)
+    render json: @post
+    
     @post.destroy
   end
 
@@ -46,6 +49,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.fetch(:post, {})
+      params.require(:post).permit(:user_id, :plant_id, :description)
     end
 end

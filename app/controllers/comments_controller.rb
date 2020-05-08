@@ -40,6 +40,9 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
+    @comment = Comment.all.find(comment_params)
+    render json: @comment
+    
     @comment.destroy
   end
 
